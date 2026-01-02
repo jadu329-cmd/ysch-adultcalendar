@@ -398,6 +398,13 @@ const MonthlySchedule = () => {
       // html2canvas를 동적으로 import
       const html2canvas = (await import('html2canvas')).default
 
+      // 버튼들을 숨기기
+      const actionButtons = calendarRef.current.querySelector('.calendar-action-buttons')
+      const buttonsHidden = actionButtons ? actionButtons.style.display === 'none' : false
+      if (actionButtons) {
+        actionButtons.style.display = 'none'
+      }
+
       // excludeFromImageCopy가 true인 일정들을 숨기기
       const allScheduleItems = calendarRef.current.querySelectorAll('.schedule-item')
       const itemsToHide = []
@@ -443,6 +450,10 @@ const MonthlySchedule = () => {
             itemsToHide.forEach(item => {
               item.style.display = ''
             })
+            // 버튼들을 다시 표시
+            if (actionButtons) {
+              actionButtons.style.display = ''
+            }
           }).catch(() => {
             // 클립보드 API가 실패하면 데이터 URL로 대체
             const dataUrl = canvas.toDataURL('image/png')
@@ -455,6 +466,10 @@ const MonthlySchedule = () => {
             itemsToHide.forEach(item => {
               item.style.display = ''
             })
+            // 버튼들을 다시 표시
+            if (actionButtons) {
+              actionButtons.style.display = ''
+            }
           })
         } else {
           // 클립보드 API가 지원되지 않으면 데이터 URL로 대체
@@ -468,6 +483,10 @@ const MonthlySchedule = () => {
           itemsToHide.forEach(item => {
             item.style.display = ''
           })
+          // 버튼들을 다시 표시
+          if (actionButtons) {
+            actionButtons.style.display = ''
+          }
         }
       }, 'image/png')
 
@@ -481,6 +500,11 @@ const MonthlySchedule = () => {
           item.style.display = ''
         }
       })
+      // 버튼들을 다시 표시
+      const actionButtons = calendarRef.current?.querySelector('.calendar-action-buttons')
+      if (actionButtons) {
+        actionButtons.style.display = ''
+      }
     }
   }
 
