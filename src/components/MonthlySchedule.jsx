@@ -532,25 +532,6 @@ const MonthlySchedule = () => {
 
   return (
     <div className="monthly-schedule">
-      <div className="schedule-header">
-        <h1 className="schedule-title">
-          <span className="title-icon">🏢</span>
-          부서 월간 일정
-        </h1>
-        
-        <div className="action-buttons">
-          <button className="action-btn copy-image" onClick={handleCopyCalendarImage}>
-            <span>📅</span>
-            달력 이미지 복사 (심방/임원모임 제외)
-          </button>
-          
-          <button className="action-btn copy-month" onClick={handleCopyPreviousMonth}>
-            <span>📋</span>
-            전월 일정 복사
-          </button>
-        </div>
-      </div>
-
       <div className="calendar-container" ref={calendarRef}>
         <div className="calendar-header">
           <button className="calendar-nav-btn" onClick={handlePrevMonth}>
@@ -562,6 +543,16 @@ const MonthlySchedule = () => {
           <button className="calendar-nav-btn" onClick={handleNextMonth}>
             ›
           </button>
+          <div className="calendar-action-buttons">
+            <button className="action-btn copy-image" onClick={handleCopyCalendarImage}>
+              <span>📅</span>
+              이미지 복사
+            </button>
+            <button className="action-btn copy-month" onClick={handleCopyPreviousMonth}>
+              <span>📋</span>
+              전월 일정 복사
+            </button>
+          </div>
         </div>
 
         <div className="calendar-grid">
