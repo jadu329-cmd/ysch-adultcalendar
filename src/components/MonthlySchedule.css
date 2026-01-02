@@ -1,7 +1,7 @@
 .monthly-schedule {
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   background-color: var(--bg, #fbfbfc);
   min-height: 100vh;
 }
@@ -83,7 +83,7 @@
 .calendar-container {
   background: var(--surface, #ffffff);
   border-radius: 15px;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -91,17 +91,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .calendar-nav-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   color: white;
-  width: 45px;
-  height: 45px;
+  width: 38px;
+  height: 38px;
   border-radius: 8px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: all 0.3s;
   display: flex;
@@ -116,7 +116,7 @@
 }
 
 .calendar-month {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #333;
   margin: 0;
   font-weight: 600;
@@ -125,7 +125,7 @@
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
+  gap: 6px;
   width: 100%;
 }
 
@@ -133,8 +133,8 @@
   text-align: center;
   font-weight: bold;
   color: #666;
-  padding: 12px;
-  font-size: 0.95rem;
+  padding: 8px;
+  font-size: 0.85rem;
 }
 
 .calendar-weekday.sunday {
@@ -146,10 +146,10 @@
 }
 
 .calendar-day {
-  min-height: 180px;
+  min-height: 120px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 8px;
+  padding: 6px;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -181,10 +181,10 @@
 }
 
 .day-number {
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   align-self: flex-start;
 }
 
@@ -200,22 +200,22 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   flex: 1;
   overflow-y: auto;
 }
 
 .schedule-item {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.65rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.3;
+  line-height: 1.2;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
