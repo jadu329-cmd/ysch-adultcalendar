@@ -18,13 +18,13 @@ export const initialSchedules = [
     id: 'initial_2025-11-02_1',
     title: '전체 임원모임',
     date: '2025-11-02',
-    color: 'gray'
+    color: 'grey'
   },
   {
     id: 'initial_2025-11-02_2',
     title: '전국청년임원수련회',
     date: '2025-11-02',
-    color: 'gray'
+    color: 'grey'
   },
   // 11월 4일
   {
@@ -36,59 +36,59 @@ export const initialSchedules = [
   // 11월 5일~11일 (기간 일정)
   {
     id: 'initial_2025-11-05_1',
-    title: '청년 캔버라 수련회 (5-11)',
+    title: '청년 캔버라 수련회',
     date: '2025-11-05',
     startDate: '2025-11-05',
     endDate: '2025-11-11',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-11-06_1',
-    title: '청년 캔버라 수련회 (5-11)',
+    title: '청년 캔버라 수련회',
     date: '2025-11-06',
     startDate: '2025-11-05',
     endDate: '2025-11-11',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-11-07_1',
-    title: '청년 캔버라 수련회 (5-11)',
+    title: '청년 캔버라 수련회',
     date: '2025-11-07',
     startDate: '2025-11-05',
     endDate: '2025-11-11',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-11-08_1',
-    title: '청년 캔버라 수련회 (5-11)',
+    title: '청년 캔버라 수련회',
     date: '2025-11-08',
     startDate: '2025-11-05',
     endDate: '2025-11-11',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-11-09_1',
-    title: '청년 캔버라 수련회 (5-11)',
+    title: '청년 캔버라 수련회',
     date: '2025-11-09',
     startDate: '2025-11-05',
     endDate: '2025-11-11',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-11-10_1',
-    title: '청년 캔버라 수련회 (5-11)',
+    title: '청년 캔버라 수련회',
     date: '2025-11-10',
     startDate: '2025-11-05',
     endDate: '2025-11-11',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-11-11_1',
-    title: '청년 캔버라 수련회 (5-11)',
+    title: '청년 캔버라 수련회',
     date: '2025-11-11',
     startDate: '2025-11-05',
     endDate: '2025-11-11',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   // 11월 6일
   {
@@ -150,7 +150,7 @@ export const initialSchedules = [
     id: 'initial_2025-11-16_1',
     title: '청년회장단',
     date: '2025-11-16',
-    color: 'gray'
+    color: 'grey'
   },
   {
     id: 'initial_2025-11-16_2',
@@ -161,7 +161,7 @@ export const initialSchedules = [
   // 11월 17일~23일 (기간 일정)
   {
     id: 'initial_2025-11-17_1',
-    title: '대전도집회 (17-23) - 임승환 목사(광주송정)',
+    title: '대전도집회 - 임승환 목사(광주송정)',
     date: '2025-11-17',
     startDate: '2025-11-17',
     endDate: '2025-11-23',
@@ -169,7 +169,7 @@ export const initialSchedules = [
   },
   {
     id: 'initial_2025-11-18_1',
-    title: '대전도집회 (17-23) - 임승환 목사(광주송정)',
+    title: '대전도집회 - 임승환 목사(광주송정)',
     date: '2025-11-18',
     startDate: '2025-11-17',
     endDate: '2025-11-23',
@@ -177,7 +177,7 @@ export const initialSchedules = [
   },
   {
     id: 'initial_2025-11-19_1',
-    title: '대전도집회 (17-23) - 임승환 목사(광주송정)',
+    title: '대전도집회 - 임승환 목사(광주송정)',
     date: '2025-11-19',
     startDate: '2025-11-17',
     endDate: '2025-11-23',
@@ -185,7 +185,7 @@ export const initialSchedules = [
   },
   {
     id: 'initial_2025-11-20_1',
-    title: '대전도집회 (17-23) - 임승환 목사(광주송정)',
+    title: '대전도집회 - 임승환 목사(광주송정)',
     date: '2025-11-20',
     startDate: '2025-11-17',
     endDate: '2025-11-23',
@@ -193,7 +193,7 @@ export const initialSchedules = [
   },
   {
     id: 'initial_2025-11-21_1',
-    title: '대전도집회 (17-23) - 임승환 목사(광주송정)',
+    title: '대전도집회 - 임승환 목사(광주송정)',
     date: '2025-11-21',
     startDate: '2025-11-17',
     endDate: '2025-11-23',
@@ -201,7 +201,7 @@ export const initialSchedules = [
   },
   {
     id: 'initial_2025-11-22_1',
-    title: '대전도집회 (17-23) - 임승환 목사(광주송정)',
+    title: '대전도집회 - 임승환 목사(광주송정)',
     date: '2025-11-22',
     startDate: '2025-11-17',
     endDate: '2025-11-23',
@@ -209,7 +209,7 @@ export const initialSchedules = [
   },
   {
     id: 'initial_2025-11-23_1',
-    title: '대전도집회 (17-23) - 임승환 목사(광주송정)',
+    title: '대전도집회 - 임승환 목사(광주송정)',
     date: '2025-11-23',
     startDate: '2025-11-17',
     endDate: '2025-11-23',
@@ -220,7 +220,7 @@ export const initialSchedules = [
     id: 'initial_2025-11-23_2',
     title: '청년회장단',
     date: '2025-11-23',
-    color: 'gray'
+    color: 'grey'
   },
   // 11월 25일
   {
@@ -247,7 +247,7 @@ export const initialSchedules = [
     id: 'initial_2025-11-30_1',
     title: '청년회장단',
     date: '2025-11-30',
-    color: 'gray'
+    color: 'grey'
   },
   // 12월 6일
   {
@@ -261,7 +261,7 @@ export const initialSchedules = [
     id: 'initial_2025-12-07_1',
     title: '전체 임원모임',
     date: '2025-12-07',
-    color: 'gray'
+    color: 'grey'
   },
   // 12월 8일
   {
@@ -363,13 +363,13 @@ export const initialSchedules = [
     id: 'initial_2025-12-21_1',
     title: '성도교제의날',
     date: '2025-12-21',
-    color: 'gray'
+    color: 'grey'
   },
   {
     id: 'initial_2025-12-21_2',
     title: '젊은부부모임',
     date: '2025-12-21',
-    color: 'gray'
+    color: 'grey'
   },
   // 12월 25일
   {
@@ -381,27 +381,27 @@ export const initialSchedules = [
   // 12월 26-28일 (기간 일정)
   {
     id: 'initial_2025-12-26_1',
-    title: '동계수련회 (26-28)',
+    title: '동계수련회',
     date: '2025-12-26',
     startDate: '2025-12-26',
     endDate: '2025-12-28',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-12-27_1',
-    title: '동계수련회 (26-28)',
+    title: '동계수련회',
     date: '2025-12-27',
     startDate: '2025-12-26',
     endDate: '2025-12-28',
-    color: 'dark-blue'
+    color: 'darkblue'
   },
   {
     id: 'initial_2025-12-28_1',
-    title: '동계수련회 (26-28)',
+    title: '동계수련회',
     date: '2025-12-28',
     startDate: '2025-12-26',
     endDate: '2025-12-28',
-    color: 'dark-blue'
+    color: 'darkblue'
   }
 ]
 
