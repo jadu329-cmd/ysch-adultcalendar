@@ -18,7 +18,7 @@ const COLOR_OPTIONS = [
 ]
 
 const MonthlySchedule = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date(2025, 11, 1)) // 2025년 12월
+  const [currentMonth, setCurrentMonth] = useState(new Date()) // 현재 월
   const [schedules, setSchedules] = useState({})
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedSchedule, setSelectedSchedule] = useState(null)
@@ -394,16 +394,26 @@ const MonthlySchedule = () => {
   const handleCopyCalendarImage = async () => {
     if (!calendarRef.current) return
 
+    // 복원을 위한 변수들 (함수 전체 스코프에서 사용)
+    let todayElementsRestore = []
+    let actionButtons = null
+
     try {
       // html2canvas를 동적으로 import
       const html2canvas = (await import('html2canvas')).default
 
       // 버튼들을 숨기기
-      const actionButtons = calendarRef.current.querySelector('.calendar-action-buttons')
-      const buttonsHidden = actionButtons ? actionButtons.style.display === 'none' : false
+      actionButtons = calendarRef.current.querySelector('.calendar-action-buttons')
       if (actionButtons) {
         actionButtons.style.display = 'none'
       }
+
+      // 오늘 날짜의 today 클래스 제거 (이미지 복사 시 빨간 표시 숨김)
+      const todayElements = calendarRef.current.querySelectorAll('.calendar-day.today')
+      todayElements.forEach(element => {
+        element.classList.remove('today')
+        todayElementsRestore.push(element)
+      })
 
       // excludeFromImageCopy가 true인 일정들을 숨기기
       const allScheduleItems = calendarRef.current.querySelectorAll('.schedule-item')
@@ -437,6 +447,14 @@ const MonthlySchedule = () => {
           itemsToHide.forEach(item => {
             item.style.display = ''
           })
+          // 오늘 날짜 표시 복원
+          todayElementsRestore.forEach(element => {
+            element.classList.add('today')
+          })
+          // 버튼들을 다시 표시
+          if (actionButtons) {
+            actionButtons.style.display = ''
+          }
           return
         }
 
@@ -449,6 +467,10 @@ const MonthlySchedule = () => {
             // 숨긴 아이템들을 다시 표시
             itemsToHide.forEach(item => {
               item.style.display = ''
+            })
+            // 오늘 날짜 표시 복원
+            todayElementsRestore.forEach(element => {
+              element.classList.add('today')
             })
             // 버튼들을 다시 표시
             if (actionButtons) {
@@ -465,6 +487,10 @@ const MonthlySchedule = () => {
             // 숨긴 아이템들을 다시 표시
             itemsToHide.forEach(item => {
               item.style.display = ''
+            })
+            // 오늘 날짜 표시 복원
+            todayElementsRestore.forEach(element => {
+              element.classList.add('today')
             })
             // 버튼들을 다시 표시
             if (actionButtons) {
@@ -483,6 +509,10 @@ const MonthlySchedule = () => {
           itemsToHide.forEach(item => {
             item.style.display = ''
           })
+          // 오늘 날짜 표시 복원
+          todayElementsRestore.forEach(element => {
+            element.classList.add('today')
+          })
           // 버튼들을 다시 표시
           if (actionButtons) {
             actionButtons.style.display = ''
@@ -500,8 +530,11 @@ const MonthlySchedule = () => {
           item.style.display = ''
         }
       })
+      // 오늘 날짜 표시 복원
+      todayElementsRestore.forEach(element => {
+        element.classList.add('today')
+      })
       // 버튼들을 다시 표시
-      const actionButtons = calendarRef.current?.querySelector('.calendar-action-buttons')
       if (actionButtons) {
         actionButtons.style.display = ''
       }
