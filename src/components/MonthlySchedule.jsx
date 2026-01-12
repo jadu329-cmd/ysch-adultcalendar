@@ -15,7 +15,7 @@ const COLOR_OPTIONS = [
   { id: 'pinkred', name: '진한 핑크', bg: '#ff99aa', text: '#fff' },
   { id: 'green', name: '연한 녹색', bg: '#d4edda', text: '#000' },
   { id: 'brightyellow', name: '밝은 노랑', bg: '#ffeb99', text: '#000' },
-  { id: 'purple', name: '연한 보라', bg: '#e1bee7', text: '#000' },
+  { id: 'purple', name: '연한 보라', bg: '#e1bee7', text: '#fff' },
   { id: 'darkpurple', name: '진한 보라', bg: '#9c27b0', text: '#fff' },
   { id: 'lightgreen', name: '밝은 녹색', bg: '#c8e6c9', text: '#000' },
   { id: 'darkgreen', name: '진한 녹색', bg: '#4caf50', text: '#fff' },
