@@ -14,7 +14,19 @@ const COLOR_OPTIONS = [
   { id: 'pink', name: '연한 핑크', bg: '#ffccdd', text: '#000' },
   { id: 'pinkred', name: '진한 핑크', bg: '#ff99aa', text: '#fff' },
   { id: 'green', name: '연한 녹색', bg: '#d4edda', text: '#000' },
-  { id: 'brightyellow', name: '밝은 노랑', bg: '#ffeb99', text: '#000' }
+  { id: 'brightyellow', name: '밝은 노랑', bg: '#ffeb99', text: '#000' },
+  { id: 'purple', name: '연한 보라', bg: '#e1bee7', text: '#000' },
+  { id: 'darkpurple', name: '진한 보라', bg: '#9c27b0', text: '#fff' },
+  { id: 'lightgreen', name: '밝은 녹색', bg: '#c8e6c9', text: '#000' },
+  { id: 'darkgreen', name: '진한 녹색', bg: '#4caf50', text: '#fff' },
+  { id: 'red', name: '연한 빨강', bg: '#ffcdd2', text: '#000' },
+  { id: 'darkred', name: '진한 빨강', bg: '#f44336', text: '#fff' },
+  { id: 'teal', name: '청록색', bg: '#b2dfdb', text: '#000' },
+  { id: 'darkteal', name: '진한 청록', bg: '#009688', text: '#fff' },
+  { id: 'amber', name: '호박색', bg: '#ffe082', text: '#000' },
+  { id: 'brown', name: '갈색', bg: '#bcaaa4', text: '#000' },
+  { id: 'lightblue', name: '하늘색', bg: '#b3e5fc', text: '#000' },
+  { id: 'indigo', name: '남색', bg: '#9fa8da', text: '#000' }
 ]
 
 const MonthlySchedule = () => {
@@ -391,12 +403,13 @@ const MonthlySchedule = () => {
     }
   }
 
-  const handleCopyCalendarImage = async () => {
+  const copyCalendarImageToClipboard = async (excludeVisits = false) => {
     if (!calendarRef.current) return
 
     // 복원을 위한 변수들 (함수 전체 스코프에서 사용)
     let todayElementsRestore = []
     let actionButtons = null
+    let itemsToHide = []
 
     try {
       // html2canvas를 동적으로 import
@@ -415,22 +428,22 @@ const MonthlySchedule = () => {
         todayElementsRestore.push(element)
       })
 
-      // excludeFromImageCopy가 true인 일정들을 숨기기
-      const allScheduleItems = calendarRef.current.querySelectorAll('.schedule-item')
-      const itemsToHide = []
-      
-      allScheduleItems.forEach(item => {
-        const scheduleId = item.getAttribute('data-schedule-id')
-        const dateStr = item.getAttribute('data-date')
-        if (scheduleId && dateStr) {
-          const daySchedules = schedules[dateStr] || []
-          const schedule = daySchedules.find(s => s.id === scheduleId)
-          if (schedule && schedule.excludeFromImageCopy) {
-            item.style.display = 'none'
-            itemsToHide.push(item)
+      // excludeFromImageCopy가 true인 일정들을 숨기기 (심방 제외 모드인 경우에만)
+      if (excludeVisits) {
+        const allScheduleItems = calendarRef.current.querySelectorAll('.schedule-item')
+        allScheduleItems.forEach(item => {
+          const scheduleId = item.getAttribute('data-schedule-id')
+          const dateStr = item.getAttribute('data-date')
+          if (scheduleId && dateStr) {
+            const daySchedules = schedules[dateStr] || []
+            const schedule = daySchedules.find(s => s.id === scheduleId)
+            if (schedule && schedule.excludeFromImageCopy) {
+              item.style.display = 'none'
+              itemsToHide.push(item)
+            }
           }
-        }
-      })
+        })
+      }
 
       // 캘린더를 이미지로 변환
       const canvas = await html2canvas(calendarRef.current, {
@@ -439,22 +452,24 @@ const MonthlySchedule = () => {
         logging: false
       })
 
+      // 복원 함수
+      const restoreElements = () => {
+        itemsToHide.forEach(item => {
+          item.style.display = ''
+        })
+        todayElementsRestore.forEach(element => {
+          element.classList.add('today')
+        })
+        if (actionButtons) {
+          actionButtons.style.display = ''
+        }
+      }
+
       // 클립보드에 복사
       canvas.toBlob((blob) => {
         if (!blob) {
           alert('이미지 생성에 실패했습니다.')
-          // 숨긴 아이템들을 다시 표시
-          itemsToHide.forEach(item => {
-            item.style.display = ''
-          })
-          // 오늘 날짜 표시 복원
-          todayElementsRestore.forEach(element => {
-            element.classList.add('today')
-          })
-          // 버튼들을 다시 표시
-          if (actionButtons) {
-            actionButtons.style.display = ''
-          }
+          restoreElements()
           return
         }
 
@@ -464,18 +479,7 @@ const MonthlySchedule = () => {
             new ClipboardItem({ 'image/png': blob })
           ]).then(() => {
             alert('달력 이미지가 클립보드에 복사되었습니다.')
-            // 숨긴 아이템들을 다시 표시
-            itemsToHide.forEach(item => {
-              item.style.display = ''
-            })
-            // 오늘 날짜 표시 복원
-            todayElementsRestore.forEach(element => {
-              element.classList.add('today')
-            })
-            // 버튼들을 다시 표시
-            if (actionButtons) {
-              actionButtons.style.display = ''
-            }
+            restoreElements()
           }).catch(() => {
             // 클립보드 API가 실패하면 데이터 URL로 대체
             const dataUrl = canvas.toDataURL('image/png')
@@ -484,18 +488,7 @@ const MonthlySchedule = () => {
             link.href = dataUrl
             link.click()
             alert('달력 이미지 다운로드가 시작됩니다.')
-            // 숨긴 아이템들을 다시 표시
-            itemsToHide.forEach(item => {
-              item.style.display = ''
-            })
-            // 오늘 날짜 표시 복원
-            todayElementsRestore.forEach(element => {
-              element.classList.add('today')
-            })
-            // 버튼들을 다시 표시
-            if (actionButtons) {
-              actionButtons.style.display = ''
-            }
+            restoreElements()
           })
         } else {
           // 클립보드 API가 지원되지 않으면 데이터 URL로 대체
@@ -505,40 +498,34 @@ const MonthlySchedule = () => {
           link.href = dataUrl
           link.click()
           alert('달력 이미지 다운로드가 시작됩니다.')
-          // 숨긴 아이템들을 다시 표시
-          itemsToHide.forEach(item => {
-            item.style.display = ''
-          })
-          // 오늘 날짜 표시 복원
-          todayElementsRestore.forEach(element => {
-            element.classList.add('today')
-          })
-          // 버튼들을 다시 표시
-          if (actionButtons) {
-            actionButtons.style.display = ''
-          }
+          restoreElements()
         }
       }, 'image/png')
 
     } catch (error) {
       console.error('달력 이미지 복사 오류:', error)
       alert('달력 이미지 복사 중 오류가 발생했습니다.')
-      // 오류 발생 시에도 숨긴 아이템들을 다시 표시
-      const allScheduleItems = calendarRef.current?.querySelectorAll('.schedule-item') || []
-      allScheduleItems.forEach(item => {
-        if (item.style.display === 'none') {
-          item.style.display = ''
-        }
+      // 오류 발생 시에도 복원
+      itemsToHide.forEach(item => {
+        item.style.display = ''
       })
-      // 오늘 날짜 표시 복원
       todayElementsRestore.forEach(element => {
         element.classList.add('today')
       })
-      // 버튼들을 다시 표시
       if (actionButtons) {
         actionButtons.style.display = ''
       }
     }
+  }
+
+  // 심방 제외 복사
+  const handleCopyCalendarImageWithoutVisits = () => {
+    copyCalendarImageToClipboard(true)
+  }
+
+  // 심방 포함 복사
+  const handleCopyCalendarImageWithAll = () => {
+    copyCalendarImageToClipboard(false)
   }
 
 
@@ -601,9 +588,13 @@ const MonthlySchedule = () => {
             ›
           </button>
           <div className="calendar-action-buttons">
-            <button className="action-btn copy-image" onClick={handleCopyCalendarImage}>
+            <button className="action-btn copy-image" onClick={handleCopyCalendarImageWithoutVisits}>
               <span>📅</span>
-              이미지 복사
+              심방 제외 복사
+            </button>
+            <button className="action-btn copy-image-all" onClick={handleCopyCalendarImageWithAll}>
+              <span>📷</span>
+              심방 포함 복사
             </button>
             <button className="action-btn copy-month" onClick={handleCopyPreviousMonth}>
               <span>📋</span>

@@ -67,6 +67,10 @@
   background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
 }
 
+.action-btn.copy-image-all {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
 .action-btn.sync {
   background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
 }
