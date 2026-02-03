@@ -366,6 +366,24 @@ const MonthlySchedule = () => {
         }
       } else {
         // 단일 일정
+        const oldDateStr = draggedSchedule.date
+        
+        // 같은 날짜로 드래그한 경우: 순서 변경을 위해 삭제 후 재저장
+        if (oldDateStr === newDateStr) {
+          // 기존 일정 삭제
+          await deleteSchedule(draggedSchedule.id)
+          // 새 ID로 재저장 (마지막 순서로 추가됨)
+          const newScheduleId = `${Date.now()}_${Math.random()}`
+          await saveSchedule({
+            ...draggedSchedule,
+            id: newScheduleId,
+            date: newDateStr,
+            startDate: null,
+            endDate: null,
+            excludeFromImageCopy: draggedSchedule.excludeFromImageCopy || false
+          })
+        } else {
+          // 다른 날짜로 드래그: 기존 로직
           await saveSchedule({
             ...draggedSchedule,
             date: newDateStr,
@@ -373,6 +391,7 @@ const MonthlySchedule = () => {
             endDate: null,
             excludeFromImageCopy: draggedSchedule.excludeFromImageCopy || false
           })
+        }
       }
       
       await loadSchedules()
