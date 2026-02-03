@@ -366,13 +366,15 @@ const MonthlySchedule = () => {
         }
       } else {
         // 단일 일정
-        const oldDateStr = draggedSchedule.date
+        const oldDateStr = typeof draggedSchedule.date === 'string' 
+          ? draggedSchedule.date 
+          : format(draggedSchedule.date, 'yyyy-MM-dd')
         
         // 같은 날짜로 드래그한 경우: 순서 변경을 위해 삭제 후 재저장
         if (oldDateStr === newDateStr) {
           // 기존 일정 삭제
           await deleteSchedule(draggedSchedule.id)
-          // 새 ID로 재저장 (마지막 순서로 추가됨)
+          // 새 ID로 재저장 (마지막 순서로 추가됨 - createdAt이 최신이므로 정렬 시 아래에 표시됨)
           const newScheduleId = `${Date.now()}_${Math.random()}`
           await saveSchedule({
             ...draggedSchedule,
@@ -380,7 +382,8 @@ const MonthlySchedule = () => {
             date: newDateStr,
             startDate: null,
             endDate: null,
-            excludeFromImageCopy: draggedSchedule.excludeFromImageCopy || false
+            excludeFromImageCopy: draggedSchedule.excludeFromImageCopy || false,
+            createdAt: null // 새로 생성되도록
           })
         } else {
           // 다른 날짜로 드래그: 기존 로직
@@ -558,13 +561,18 @@ const MonthlySchedule = () => {
     }
     
     // 연속일정(기간 일정)을 우선순위로 정렬 (맨 위에 표시)
+    // 기간 일정이 아닌 경우 createdAt 기준으로 정렬 (오래된 것부터)
     return daySchedules.sort((a, b) => {
-      const aIsPeriod = a.startDate && a.endDate
-      const bIsPeriod = b.startDate && b.endDate
+      const aIsPeriod = a.startDate && a.endDate && a.startDate !== a.endDate
+      const bIsPeriod = b.startDate && b.endDate && b.startDate !== b.endDate
       
       if (aIsPeriod && !bIsPeriod) return -1 // a가 기간일정이면 위로
       if (!aIsPeriod && bIsPeriod) return 1  // b가 기간일정이면 위로
-      return 0 // 둘 다 같으면 순서 유지
+      
+      // 둘 다 기간 일정이거나 둘 다 일반 일정인 경우 createdAt 기준 정렬
+      const aCreated = a.createdAt?.toMillis?.() || a.createdAt?.seconds * 1000 || 0
+      const bCreated = b.createdAt?.toMillis?.() || b.createdAt?.seconds * 1000 || 0
+      return aCreated - bCreated // 오래된 것부터 (위에서 아래로)
     })
   }
 
